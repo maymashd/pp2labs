@@ -1,0 +1,6 @@
+C:\Users\User\Desktop\PP2labs\Week 1\CIRCLE.find\CIRCLE.find\bin\Debug\CIRCLE.find.exe.config
+C:\Users\User\Desktop\PP2labs\Week 1\CIRCLE.find\CIRCLE.find\bin\Debug\CIRCLE.find.exe
+C:\Users\User\Desktop\PP2labs\Week 1\CIRCLE.find\CIRCLE.find\bin\Debug\CIRCLE.find.pdb
+C:\Users\User\Desktop\PP2labs\Week 1\CIRCLE.find\CIRCLE.find\obj\Debug\CIRCLE.find.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\PP2labs\Week 1\CIRCLE.find\CIRCLE.find\obj\Debug\CIRCLE.find.exe
+C:\Users\User\Desktop\PP2labs\Week 1\CIRCLE.find\CIRCLE.find\obj\Debug\CIRCLE.find.pdb

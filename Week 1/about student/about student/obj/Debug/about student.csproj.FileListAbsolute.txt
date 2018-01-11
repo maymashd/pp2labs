@@ -1,0 +1,7 @@
+C:\Users\User\Desktop\PP2labs\Week 1\about student\about student\obj\Debug\about student.csprojResolveAssemblyReference.cache
+C:\Users\User\Desktop\PP2labs\Week 1\about student\about student\obj\Debug\about student.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\PP2labs\Week 1\about student\about student\bin\Debug\about student.exe.config
+C:\Users\User\Desktop\PP2labs\Week 1\about student\about student\bin\Debug\about student.exe
+C:\Users\User\Desktop\PP2labs\Week 1\about student\about student\bin\Debug\about student.pdb
+C:\Users\User\Desktop\PP2labs\Week 1\about student\about student\obj\Debug\about student.exe
+C:\Users\User\Desktop\PP2labs\Week 1\about student\about student\obj\Debug\about student.pdb
