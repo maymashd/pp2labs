@@ -22,30 +22,26 @@ namespace complex_number
             return a + "/" + b;
         }
 
-        /// <summary>
-        /// 5/6 + 1/2 = 6/8 (wrong)
-        /// </summary>
-        /// <param name="b"></param>
-        /// <returns></returns>
-        public Complex Add(Complex complex2) // this -> a, complex2 -> b
+    
+        public Complex Add(Complex complex2) 
         {
             Complex result = new Complex(this.a*complex2.b + complex2.a*this.b, this.b * complex2.b);
                     
             return result;
         }
-        public Complex Minus(Complex complex2) // this -> a, complex2 -> b
+        public Complex Minus(Complex complex2) 
         {
             Complex result = new Complex(this.a * complex2.b - complex2.a * this.b, this.b * complex2.b);
 
             return result;
         }
-        public Complex Multiple(Complex complex2) // this -> a, complex2 -> b
+        public Complex Multiple(Complex complex2) 
         {
             Complex result = new Complex(this.a * complex2.a , this.b * complex2.b);
 
             return result;
         }
-        public Complex Division(Complex complex2) // this -> a, complex2 -> b
+        public Complex Division(Complex complex2) 
         {
             Complex result = new Complex(this.a * complex2.b, this.b * complex2.a);
 
@@ -76,7 +72,7 @@ namespace complex_number
 
 
 
-        // 24/36
+        
 
     }
 
