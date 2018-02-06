@@ -30,6 +30,7 @@ namespace little_prime_number
             StreamWriter sr = new StreamWriter(@"C:\Users\User\desktop\PP2labs\Week2\little prime number\answer.txt");
             sr.WriteLine(minn);
             sr.Close();
+
             Console.ReadKey();
         }
     }

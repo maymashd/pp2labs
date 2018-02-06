@@ -26,10 +26,11 @@ namespace maximum_and_mimimum
                 minn = Math.Min(minn, int.Parse(s));
 
             }
-            Console.WriteLine("Minimum number is ");
-            Console.WriteLine(minn);
-            Console.WriteLine("Maximum number is");
-            Console.WriteLine(maxx);
+            StreamWriter sw = new StreamWriter(@"C:\Users\User\Desktop\PP2labs\Week2\Minimum and maximum\answer");
+            sw.WriteLine("Maximum number is "+maxx);
+            sw.WriteLine("Minimum number is "+minn);
+            sw.Close();
+            
 
             Console.ReadKey();
 
