@@ -10,9 +10,9 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            string line;
+            /*string line;
            line= Console.ReadLine();
-             args = line.Split(' ');
+            string[] arr = line.Split(' ');*/
             foreach (string s in args)// для всех strings в массива аргс выполняется следующее
             {
                  int a = int.Parse(s); // переводит string на int

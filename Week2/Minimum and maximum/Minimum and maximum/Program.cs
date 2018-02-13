@@ -18,12 +18,16 @@ namespace maximum_and_mimimum
 
             string[] line = line2.Split(' ');
 
-            int maxx = -10000000;
-            int minn = 10000000;
+            int maxx = int.Parse(line[0]);
+            int minn = int.Parse(line[0]);
+
+            
             foreach (string s in line)
             {
-                maxx = Math.Max(maxx, int.Parse(s));
-                minn = Math.Min(minn, int.Parse(s));
+                if (int.Parse(s) > maxx)
+                    maxx = int.Parse(s);
+                if (int.Parse(s) < minn)
+                    minn = int.Parse(s);
 
             }
             StreamWriter sw = new StreamWriter(@"C:\Users\User\Desktop\PP2labs\Week2\Minimum and maximum\answer");

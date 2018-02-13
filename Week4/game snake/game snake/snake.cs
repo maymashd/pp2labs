@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace game_snake
 {
+    [Serializable]
     class snake
     {
         public List<Point> body;
         public string sign;
         public Wall wall1;
         public Wall wall2;
-        public int sum = 2;
+        public int sum = 1;
         public int xr, yr,xc,yc;
+        public int record;
         Random rnd = new Random();
         
         public snake()//пустой конструктор класса снейк
@@ -22,7 +25,7 @@ namespace game_snake
 
             xr = rnd.Next(2, 20);//рандомный фуд
             yr = rnd.Next(2, 20);
-
+            record = 0;
             
 
             body.Add(new Point(10, 10));//изначально длина 1
@@ -31,6 +34,7 @@ namespace game_snake
         public void draw()//функция которая рисует снейк
         {
             
+
             Console.ForegroundColor = ConsoleColor.Yellow;
             
             Console.SetCursorPosition(xr, yr);
@@ -50,12 +54,49 @@ namespace game_snake
             }
             Console.SetCursorPosition(xc, yc);
             Console.Write(' ');
-               //Wall wall = new Wall();
+            //Wall wall = new Wall();
             //wall.draw();
 
+            Console.SetCursorPosition(10, 50);
+            Console.WriteLine("Your length is: " + sum);
+            Console.SetCursorPosition(10, 52);
+            Console.WriteLine("Record is: " + record);
+            Console.SetCursorPosition(10, 54);
+            Console.WriteLine("If you want to safe,please type spacebar "); 
+            Console.SetCursorPosition(10, 56);
+            Console.WriteLine("If you want to exit,please type esp ");
+
         }
-        public void move(int xx, int yy,Wall wall)//двигает тело снейка в определенную сторону
+        public void createfood(Wall wall5)
         {
+           
+            bool k = true;
+            while (k)
+            {
+                xr = rnd.Next(2, 30);
+                yr = rnd.Next(2, 30);
+                k = false;
+                for (int i=0;i<body.Count;++i)
+                    for (int j = 0; j < wall5.body.Count; ++j)
+                    {
+                        if ((xr == body[i].x && yr == body[i].y) || (xr == wall5.body[j].x && yr == wall5.body[j].y))
+                            k = true;
+                    }
+            }
+
+        
+        }
+        public void move(int xx, int yy,Wall wall3)//двигает тело снейка в определенную сторону
+        {
+            int xxx = body[0].x + xx;
+            int yyy = body[0].y + yy;
+
+            if (body.Count >= 2)
+            {
+                if (body[1].x == xxx && body[1].y == yyy )
+                    return;
+            }
+            
 
             xc = body[body.Count - 1].x;
             yc = body[body.Count - 1].y;
@@ -74,43 +115,15 @@ namespace game_snake
             {
                 Console.SetCursorPosition(10, 50);
                 Console.WriteLine("                       ");
-                Console.SetCursorPosition(10, 50);
-                Console.WriteLine("Your length is: " + sum);
-
+                
                 body.Add(new Point(0, 0));
                 Console.SetCursorPosition(xr, yr);
                 Console.Write(' ');
-                xr = rnd.Next(2, 30);
-                yr = rnd.Next(2, 30);
-                while (true)
-                {
-                    int k = 0;
-                    foreach (Point p in body)
-                    {
-                        foreach(Point t in wall.body)
-                        {
-
-                            if ((xr == t.x && yr != t.y) || (xr == p.x && yr == p.x))
-                            {
-                                xr = rnd.Next(2, 30);
-                                yr = rnd.Next(2, 30);
-                                continue;
-                            }
-                            else
-                            {
-                                k = 1;
-                                break;
-                            }
-                        }
-                        if (k == 1)
-                            break;
-                    }
-                    if (k == 1)
-                        break;
-                }
+                createfood(wall3);          
+                
                 
                 sum++;
-                
+                record = Math.Max(record, sum);
 
             }
 

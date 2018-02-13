@@ -9,7 +9,8 @@ using System.Xml.Serialization;
 
 
 namespace complex_number
-{  [Serializable]
+{
+    [Serializable]
     class Complex
     {
         public int a, b;
@@ -18,6 +19,10 @@ namespace complex_number
         {
             a = _a;
             b = _b;
+
+        }
+        public Complex()
+        {
 
         }
 
@@ -52,6 +57,7 @@ namespace complex_number
             return result;
         }
 
+
         public static Complex operator +(Complex c1, Complex c2)
         {
             Complex c = new Complex(c1.a + c2.a, c1.b + c2.b);
@@ -83,6 +89,39 @@ namespace complex_number
     class Program
     {
         
+        static void F1(Complex a)
+        {
+            FileStream fs = new FileStream("data.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(fs, a);
+            fs.Close();
+        }
+        static void F2(Complex t7)
+        {
+            BinaryFormatter bf=new BinaryFormatter();
+        
+             FileStream fs3 = new FileStream("data.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            t7 = bf.Deserialize(fs3) as Complex;
+            Console.WriteLine(t7);
+
+        }
+        static void F3(Complex a)
+        {
+            FileStream fs = new FileStream("data.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            XmlSerializer bf = new XmlSerializer(typeof(Complex) );
+            bf.Serialize(fs, a);
+            fs.Close();
+        }
+        static void F4(Complex t7)
+        {
+            XmlSerializer bf = new XmlSerializer(typeof(Complex));
+
+            FileStream fs3 = new FileStream("data.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            t7 = bf.Deserialize(fs3) as Complex;
+            Console.WriteLine(t7);
+
+        }
+
         static void Main(string[] args)
         {
 
@@ -104,6 +143,7 @@ namespace complex_number
             Complex t4 = t1.Minus(t2);
             Complex t5 = t1.Multiple(t2);
             Complex t6 = t1.Division(t2);
+            Complex t7=null;
             t3.Simplify();
             t4.Simplify();
             t5.Simplify();
@@ -114,14 +154,10 @@ namespace complex_number
             Console.WriteLine("The product of two numbers is=" + t5);
             Console.WriteLine("The division of two numbers is=" + t6);
 
-            FileStream fs = new FileStream("data.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(fs, t6);
-            fs.Close();
-            bf = new BinaryFormatter();
-            FileStream fs2 = new FileStream("data.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            Complex t7 = bf.Deserialize(fs2) as Complex;
-            Console.WriteLine("The Complex was successfully Deserialized " + t7);
+            F1(t6);
+            F2(t7);
+            
+            Console.WriteLine("The Complex was successfully Deserialized ");
              Console.ReadKey();
 
         }

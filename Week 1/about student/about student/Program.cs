@@ -20,6 +20,11 @@ namespace Student
                this. gpa =gpa;
                 this.age = age;
             }
+            public student (string name1,string lastname1)
+            {
+                this.name = name1;
+                lastname = lastname1;
+            }
             public override string ToString()
             {
                 return "Your name is " + name + "\nYour last name is " + lastname + "\nYour age is " + age + "\nYour gpa is " + gpa;
@@ -36,6 +41,8 @@ namespace Student
             Console.WriteLine("What is your name gpa?");
             double gpa =double.Parse( Console.ReadLine());
             student a = new student(name, lastname, age, gpa);
+
+            student a2 = new student(name, lastname);
             Console.WriteLine(a);
             Console.ReadKey();
         }

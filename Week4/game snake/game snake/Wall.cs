@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 namespace game_snake
 {
-   
+   [Serializable]
     class Wall
     {
         public List<Point> body;

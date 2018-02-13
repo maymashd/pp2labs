@@ -12,19 +12,19 @@ namespace circle
         public circle(double r)
         {
             this.r = r;
-            findarea(this.r);
-            findlenght(this.r);
-            finddiametre(this.r);
+            findarea();
+            findlenght();
+            finddiametre();
         }
-        public void findarea(double r)
+        public void findarea()
         {
             area = Math.PI * r * r;
         }
-        public void findlenght(double r)
+        public void findlenght()
         {
             length = r * 2*Math.PI;
         }
-        public void finddiametre(double r)
+        public void finddiametre()
         {
             diametre = 2 * r;
         }

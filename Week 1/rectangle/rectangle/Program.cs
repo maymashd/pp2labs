@@ -11,7 +11,10 @@ namespace rectangle
         class rectangle
         {
             double w, h, s, p;
-
+            public rectangle()
+            {
+                
+            }
             public rectangle(double w,double h)
             {
                 this.w = w;
@@ -20,6 +23,7 @@ namespace rectangle
                 findperimetre();
 
             }
+            
             public void findarea()
             {
                 this.s = w * h;

@@ -26,8 +26,14 @@ namespace FileManager{
                     StreamReader sr = new StreamReader(t[s2].FullName);
                     string st = sr.ReadLine();
                     Console.WriteLine(st);
-                    Console.ReadKey();
-                    Console.Clear();
+                    while (true)
+                    {
+                        ConsoleKeyInfo q = Console.ReadKey();
+                        if (q.Key == ConsoleKey.Q)
+                            break;
+                    }
+
+                    
                 }}
             if (p.Key == ConsoleKey.Escape){
                 if (a.FullName == q.FullName){

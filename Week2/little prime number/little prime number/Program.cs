@@ -12,11 +12,12 @@ namespace little_prime_number
         {
             int test(int c)
             {
-                int cnt = 0;
+                int sum = 0;
                 for (int i = 1; i <= c; ++i)
                     if (c % i == 0)
-                        cnt++;
-                return cnt;
+                        sum++;
+                return sum;
+
             }
             int minn=10000000;
             string line = File.ReadAllText(@"C:\Users\User\desktop\PP2labs\Week2\little prime number\test.txt");
