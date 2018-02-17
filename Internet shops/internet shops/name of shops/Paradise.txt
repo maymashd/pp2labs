@@ -1,0 +1,6 @@
+5
+Juice 12 200
+Coca-cola 20 150
+fanta 25 130
+Sprite 30 160
+pepsi 23 150
