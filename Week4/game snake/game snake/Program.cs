@@ -5,171 +5,113 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;//библиотека работа с файламали и директорями
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
 namespace game_snake
 {
     class Program
     {
-        static void F1(snake Snake)
+        public static void MoveSnake()
         {
-            FileStream v = new FileStream("date1.txt", FileMode.OpenOrCreate,FileAccess.ReadWrite);
-            BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(v, Snake);
-            v.Close();
-            
+            while (!Game.GameOver)
+            {
+
+                switch (Game.direction)
+                {
+                    case 1:
+                        Game.Snake.move(1, 0,Game.wall);
+                        break;
+                    case 2:
+                        Game.Snake.move(-1, 0, Game.wall);
+                        break;
+                    case 3:
+                        Game.Snake.move(0, 1, Game.wall);
+                        break;
+                    case 4:
+                        Game.Snake.move(0, -1, Game.wall);
+                        break;
+                }
+                Game.GameCheck(Game.GameOver);
+                if (!Game.GameOver)
+                {
+                    Thread a = new Thread(MoveSnake);
+                    a.Abort();
+
+                }
+                Game.Draw();
+
+
+
+
+                Thread.Sleep(Game.speed);
+            }
         }
-        static snake F2()
-        {
-
-            FileStream v = new FileStream("date1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            BinaryFormatter bf = new BinaryFormatter();
-            snake Snake2 = bf.Deserialize(v) as snake;
-            v.Close();
-            return Snake2;
-
-        }
-        static void F3(Wall wall)
-        {
-            FileStream v = new FileStream("date2.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(v,wall );
-            v.Close();
-
-        }
-        static Wall F4()
-        {
-
-            FileStream v = new FileStream("date2.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            BinaryFormatter bf = new BinaryFormatter();
-            Wall wall = bf.Deserialize(v) as Wall;
-            v.Close();
-            return wall;
-
-        }
-        static void F5(int b)
-        {
-            StreamWriter a = new StreamWriter(@"C:\Users\User\Desktop\PP2labs\Week4\game snake\record.txt");
-            a.WriteLine(b);
-            a.Close(); 
-        }
-        static int F6()
-        {
-            StreamReader a = new StreamReader(@"C:\Users\User\Desktop\PP2labs\Week4\game snake\record.txt");
-            string s = a.ReadLine();
-            a.Close();
-            return int.Parse(s);
-        }
-
-
         static int o,ii=0,jj=0;//статичные перемены которые содержать один или ноль зависимо от левела
         static void Main(string[] args)
         {
-             
-
-            snake Snake = new snake();//создает эгземпляр класса снейк
-            Snake = F2();
-            Console.Clear();
-
-            
-            Wall wall = new Wall(1);//создает эгземпляр класса уол
-            wall = F4();
+          
             Console.WriteLine("If you want to start again type 1");
             Console.WriteLine("If you want to continue type 2");
             ConsoleKeyInfo ki = Console.ReadKey();
+            Game game=new Game(1);
             if (ki.Key == ConsoleKey.NumPad1)
             {
-                snake Snake3 = new snake();
-                F1(Snake3);
-                Wall wall4 = new Wall(1);
-                F3(wall4);
-                Snake = Snake3;
-                wall = wall4;
-
+                 game=new Game(1);
+                Game.Snake.move(Game.x, Game.y, Game.wall);
+            }
+            if (ki.Key == ConsoleKey.NumPad2)
+            {
+                game = new Game(2);
             }
             Console.Clear();
-            Snake.record = F6();
-            wall.draw();//функция класса уол который рисует стену
-            StreamReader sr = new StreamReader(@"C:\Users\User\Desktop\PP2labs\Week4\game snake\game over.txt");//содержит текст который выводит после порожения
-            Snake.draw();
+
+            Game.wall.draw();
+          
+            Thread t = new Thread(MoveSnake);
+            t.Start();
             while (true)
             {
-                ConsoleKeyInfo key = Console.ReadKey();//ждет пока нажимаем клавиатуру 
-                if (key.Key == ConsoleKey.UpArrow)
-                    Snake.move(0, -1,wall);
-                if (key.Key == ConsoleKey.DownArrow)
-                    Snake.move(0, 1,wall);
-                if (key.Key == ConsoleKey.RightArrow)
-                    Snake.move(1, 0,wall);
-                if (key.Key == ConsoleKey.LeftArrow)
-                    Snake.move(-1, 0,wall);
-                if (key.Key==ConsoleKey.Spacebar)
+                ConsoleKeyInfo btn = Console.ReadKey();//ждет пока нажимаем клавиатуру 
+                switch (btn.Key)
                 {
-                    F1(Snake);
-                    F3(wall);
-                    F5(Snake.record); 
+                    case ConsoleKey.UpArrow:
+                        Game.direction = 4;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        Game.direction = 3;
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        Game.direction = 2;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        Game.direction = 1;
+                        break;
+                   
                 }
-                if (key.Key == ConsoleKey.Escape)
-               {
+
+            
+            if (btn.Key==ConsoleKey.Spacebar)
+                {
+                    t.Abort();
+
+                    Game.seri.F1(Game.Snake);
+                    Game.seri.F3(Game.wall);
+                    Game.seri.F5(Game.Snake.record); 
+                }
+                if (btn.Key == ConsoleKey.Enter)
+                {
+                    Console.Clear();
+                    t = new Thread(MoveSnake);
+                    t.Start();
+                    Game.wall.draw();
+
+                }
+                if (btn.Key == ConsoleKey.Escape)
+                {
+                    t.Abort();
                     return;
-
-                }
-
-                if (Snake.sum==5 && ii==0)//если длина больше чем 5 то меняем левел 
-                {
-                    wall = new Wall(2);
-                    int m = 3;
-                    foreach (Point P in Snake.body)
-                    {
-                        P.x = 5;
-                        P.y = m;
-                        m++;
-                    }
-                    ii = 1;//чтобы повторно не менят //чтобы повторно не менят карту
-                    Console.Clear();
-                    wall.draw();//рисуем новую карту
-                    Snake.createfood(wall);
-                   
-                }
-                if (Snake.sum==12 && jj==0)//если длина больше чем 12 то подключаем третий левел
-                {
-                    wall = new Wall(3);
-                    jj = 1;//чтобы повторно не менят карту
-                    int m = 3;
-                    foreach (Point P in Snake.body)
-                    {
-                        P.x = 5;
-                        P.y = m;
-                        m++;
-                    }
-                   
-                    Console.Clear();
-                    wall.draw();//рисуем новую карту
-                    Snake.createfood(wall);
                 }
                 
-                for (int i = 1; i < Snake.body.Count - 1; ++i)
-                    if (Snake.body[0].x == Snake.body[i].x && Snake.body[0].y == Snake.body[i].y)//если голова снейка ударилась в тело
-                    {
-                        
-                        Console.Clear();
-                        Console.SetCursorPosition(10, 10);
-                        
-                        Console.WriteLine(sr.ReadToEnd());
-                        Console.ReadKey();
-                        return;
-                    }
-                for (int i = 1; i < wall.body.Count - 1; ++i)
-                    if (Snake.body[0].x == wall.body[i].x && Snake.body[0].y == wall.body[i].y)//если голова снейка ударилась в стенку
-                    {
-                        
-                        Console.Clear();
-                            
-                        Console.SetCursorPosition(10, 10);
-          
-                        Console.WriteLine(sr.ReadToEnd());
-                        Console.ReadKey();
-                        return;
-                    }
-                Snake.draw();//рисуем тело снейка
+
 
 
             }

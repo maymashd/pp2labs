@@ -18,7 +18,10 @@ namespace game_snake
         public int xr, yr,xc,yc;
         public int record;
         Random rnd = new Random();
-        
+        void init()
+        {
+
+        }
         public snake()//пустой конструктор класса снейк
         {
             body = new List<Point>();//тело снейка
@@ -30,15 +33,15 @@ namespace game_snake
 
             body.Add(new Point(10, 10));//изначально длина 1
             sign = "*";
+           
         }
         public void draw()//функция которая рисует снейк
         {
             
-
             Console.ForegroundColor = ConsoleColor.Yellow;
             
             Console.SetCursorPosition(xr, yr);
-            Console.WriteLine("o");
+            Console.WriteLine("@");
             Console.ForegroundColor = ConsoleColor.Blue;
             foreach (Point p in body)
             {
@@ -52,8 +55,8 @@ namespace game_snake
 
                 Console.WriteLine(sign);
             }
-            Console.SetCursorPosition(xc, yc);
-            Console.Write(' ');
+            //Console.SetCursorPosition(xc, yc);
+            //Console.Write(' ');
             //Wall wall = new Wall();
             //wall.draw();
 
@@ -90,7 +93,7 @@ namespace game_snake
         {
             int xxx = body[0].x + xx;
             int yyy = body[0].y + yy;
-
+            
             if (body.Count >= 2)
             {
                 if (body[1].x == xxx && body[1].y == yyy )
@@ -100,6 +103,8 @@ namespace game_snake
 
             xc = body[body.Count - 1].x;
             yc = body[body.Count - 1].y;
+            Console.SetCursorPosition(xc, yc);
+            Console.Write(' ');
 
             for (int i = body.Count() - 1; i >= 1; i--)
             {
@@ -119,7 +124,7 @@ namespace game_snake
                 body.Add(new Point(0, 0));
                 Console.SetCursorPosition(xr, yr);
                 Console.Write(' ');
-                createfood(wall3);          
+                createfood(Game.wall);          
                 
                 
                 sum++;
@@ -128,7 +133,6 @@ namespace game_snake
             }
 
             
-
 
 
 
