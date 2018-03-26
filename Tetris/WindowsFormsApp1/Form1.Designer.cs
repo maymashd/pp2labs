@@ -54,6 +54,7 @@
             this.button.Size = new System.Drawing.Size(38, 23);
             this.button.TabIndex = 0;
             this.button.UseVisualStyleBackColor = false;
+            this.button.Click += new System.EventHandler(this.button_Click);
             this.button.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.button_KeyPress);
             // 
             // Form1

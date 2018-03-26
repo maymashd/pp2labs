@@ -22,7 +22,7 @@ namespace Calculator
             
 
             Button btn = sender as Button;
-            if ((btn.Text == "0" && textBox1.Text == "") || (textBox1.Text == "" && btn.Text == "00"))
+            /*if ((btn.Text == "0" && textBox1.Text == "0") || (textBox1.Text == "0" && btn.Text == "00"))
             {
 
             }
@@ -31,11 +31,17 @@ namespace Calculator
                 textBox1.Text += btn.Text;
                 label1.Text += btn.Text;    
             }
+            */
+            if (btn.Text == "0")
+                btn.Text = btn.Text;
+            else
+                btn.Text += btn.Text;
+
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "";
+            textBox1.Text = "0";
             Calc.update();
             Calc.a = 0;
             label1.Text = "";   
@@ -82,6 +88,17 @@ namespace Calculator
         {
             textBox1.Text = (double.Parse(textBox1.Text) * (-1)).ToString();
             label1.Text = textBox1.Text;
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+            Calc.point_click(sender);
+
         }
     }
 }

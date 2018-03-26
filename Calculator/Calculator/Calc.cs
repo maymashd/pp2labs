@@ -16,6 +16,7 @@ namespace Calculator
         public static double sum = 0;
         public static string operator1 = "";
         public static double a, b;
+        public static bool Point=false;
         public static void operator_click(object sender,string x)
         {
             if (x != "")
@@ -23,6 +24,13 @@ namespace Calculator
                 a = double.Parse(x);
                 Button btn = sender as Button;
                 operator1 = btn.Text;
+            }
+        }
+        public static void point_click(object sender)
+        {
+            if (Point == false)
+            {
+
             }
         }
         public static void operator_click2(object sender,string x)
